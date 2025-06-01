@@ -4,6 +4,7 @@ fn main() {
     let (r1,r2) = quadeq(2.0,-8.0,6.0);
     println!("{r1},{r2}");
     println!("{}",is_even(29832));
+    println!("{}",abs(-12.6));
 }
 fn n_fibonacci(x:usize) -> usize {
     let mut fibonacci = Vec::new();
@@ -16,6 +17,13 @@ fn n_fibonacci(x:usize) -> usize {
 }
 fn pythagoras(a:f32,b:f32) -> f32 {
     return (a.powf(2.0)+b.powf(2.0)).sqrt()
+}
+fn abs(x:f32) -> f32 {
+    if x < 0.0 {
+        return x*-1.0
+    } else {
+        return x
+    }
 }
 fn quadeq(a:f32,b:f32,c:f32) -> (f32,f32) {
     let d: f32 = b.powf(2.0)-4.0*a*c;
