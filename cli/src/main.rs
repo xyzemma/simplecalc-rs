@@ -62,22 +62,23 @@ fn eval(expr: String) -> f32 {
                 exprpartval::num { value } => println!("Number: {}", value),
                 exprpartval::oper { value } => println!("Operator: {}", value),
             }
-        } 
+        }
+        eval_solve(exprvec); 
         return 0.0;
 }
 fn eval_solve(mut expr: Vec<exprpart>) -> Vec<exprpart>{
     let mut rvec: Vec<exprpart> = Vec::new();
     // Solve multiplications and divisions first
-    let mut found_mlt = true;
-    while found_mlt {
-        found_mlt = false;
+    let mut found_m_d = true;
+    while found_m_d {
+        found_m_d = false;
         for (i,val) in expr.iter().enumerate() {
             match val.val {
                 exprpartval::num { value } => {},
                 exprpartval::oper { value } => {
                     let Operator = value;
                     if Operator == '*' {
-                        found_mlt = true;
+                        found_m_d = true;
                         let mut lvalue = 0.0;
                         let mut rvalue = 0.0;
                         match expr[i-1].val {
@@ -98,11 +99,91 @@ fn eval_solve(mut expr: Vec<exprpart>) -> Vec<exprpart>{
                         expr.remove(i+1);
                         break;
 
+                    } else if Operator == '/' {
+                        found_m_d = true;
+                        let mut lvalue = 0.0;
+                        let mut rvalue = 0.0;
+                        match expr[i-1].val {
+                            exprpartval::num {value} => {
+                                lvalue = value;
+                            },
+                            exprpartval::oper {value} => {},
+                        }
+                        match expr[i+1].val {
+                            exprpartval::num {value} => {
+                                rvalue = value;
+                            },
+                            exprpartval::oper {value} => {},
+                        }
+                        let solved = lvalue/rvalue;
+                        expr[i] = exprpart {val: exprpartval::num{value:solved}};
+                        expr.remove(i-1);
+                        expr.remove(i+1);
+                        break;
+
                     }
                 },
         }
     }
-    } 
+    }
+    // Solving addition and subtraction next
+    let mut found_a_s = true;
+    while found_a_s {
+        found_a_s = false;
+        for (i,val) in expr.iter().enumerate() {
+            match val.val {
+                exprpartval::num { value } => {},
+                exprpartval::oper { value } => {
+                    let Operator = value;
+                    if Operator == '+' {
+                        found_a_s = true;
+                        let mut lvalue = 0.0;
+                        let mut rvalue = 0.0;
+                        match expr[i-1].val {
+                            exprpartval::num {value} => {
+                                lvalue = value;
+                            },
+                            exprpartval::oper {value} => {},
+                        }
+                        match expr[i+1].val {
+                            exprpartval::num {value} => {
+                                rvalue = value;
+                            },
+                            exprpartval::oper {value} => {},
+                        }
+                        let solved = lvalue+rvalue;
+                        expr[i] = exprpart {val: exprpartval::num{value:solved}};
+                        expr.remove(i-1);
+                        expr.remove(i+1);
+                        break;
+
+                    } else if Operator == '-' {
+                        found_a_s = true;
+                        let mut lvalue = 0.0;
+                        let mut rvalue = 0.0;
+                        match expr[i-1].val {
+                            exprpartval::num {value} => {
+                                lvalue = value;
+                            },
+                            exprpartval::oper {value} => {},
+                        }
+                        match expr[i+1].val {
+                            exprpartval::num {value} => {
+                                rvalue = value;
+                            },
+                            exprpartval::oper {value} => {},
+                        }
+                        let solved = lvalue-rvalue;
+                        expr[i] = exprpart {val: exprpartval::num{value:solved}};
+                        expr.remove(i-1);
+                        expr.remove(i+1);
+                        break;
+
+                    }
+                },
+        }
+    }
+    }
 
     return rvec;
 
