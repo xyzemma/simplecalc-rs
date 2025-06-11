@@ -1,4 +1,4 @@
-use std::io;
+use std::io::{self, Write};
 enum exprpartval {
     num{value:f32},
     oper{value:char},
@@ -8,6 +8,8 @@ struct exprpart {
 }
 fn main() {
     loop {
+        print!(">> ");
+        let _ = io::stdout().flush();
         let mut input = String::new();
         match io::stdin().read_line(&mut input) {
             Ok(_) => {
@@ -182,7 +184,7 @@ fn eval_solve(mut expr: Vec<exprpart>) -> Vec<exprpart>{
     } else{
         for i in &expr {
             match i.val {
-                exprpartval::num { value } => println!("Number: {}", value),
+                exprpartval::num { value } => println!("{}", value),
                 exprpartval::oper { value } => println!("Operator: {}", value),
             }
         }
