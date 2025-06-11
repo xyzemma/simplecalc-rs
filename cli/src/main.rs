@@ -96,7 +96,7 @@ fn eval_solve(mut expr: Vec<exprpart>) -> Vec<exprpart>{
                         let solved = lvalue*rvalue;
                         expr[i] = exprpart {val: exprpartval::num{value:solved}};
                         expr.remove(i-1);
-                        expr.remove(i+1);
+                        expr.remove(i);
                         break;
 
                     } else if Operator == '/' {
@@ -118,7 +118,7 @@ fn eval_solve(mut expr: Vec<exprpart>) -> Vec<exprpart>{
                         let solved = lvalue/rvalue;
                         expr[i] = exprpart {val: exprpartval::num{value:solved}};
                         expr.remove(i-1);
-                        expr.remove(i+1);
+                        expr.remove(i);
                         break;
 
                     }
@@ -154,7 +154,7 @@ fn eval_solve(mut expr: Vec<exprpart>) -> Vec<exprpart>{
                         let solved = lvalue+rvalue;
                         expr[i] = exprpart {val: exprpartval::num{value:solved}};
                         expr.remove(i-1);
-                        expr.remove(i+1);
+                        expr.remove(i);
                         break;
 
                     } else if Operator == '-' {
@@ -176,13 +176,19 @@ fn eval_solve(mut expr: Vec<exprpart>) -> Vec<exprpart>{
                         let solved = lvalue-rvalue;
                         expr[i] = exprpart {val: exprpartval::num{value:solved}};
                         expr.remove(i-1);
-                        expr.remove(i+1);
+                        expr.remove(i);
                         break;
 
                     }
                 },
         }
     }
+    }
+    for i in &expr {
+        match i.val {
+            exprpartval::num { value } => println!("Number: {}", value),
+            exprpartval::oper { value } => println!("Operator: {}", value),
+        }
     }
 
     return rvec;
