@@ -38,8 +38,7 @@ fn eval(expr: String) -> f32 {
                     }
                     if expr.chars().nth((index+1).try_into().unwrap()).unwrap().is_digit(10) && (index == 0||!expr.chars().nth((index-1).try_into().unwrap()).unwrap().is_digit(10) && active_num.is_empty()){
                         active_num.push(i);
-                    }
-                    if !exprvec.is_empty() {
+                    } else if !exprvec.is_empty() {
                         exprvec.push(exprpart{val: exprpartval::oper{value:i}});
                     }
 
