@@ -56,12 +56,6 @@ fn eval(expr: String) -> f32 {
                 
             }
         }
-        for i in &exprvec {
-            match i.val {
-                exprpartval::num { value } => println!("Number: {}", value),
-                exprpartval::oper { value } => println!("Operator: {}", value),
-            }
-        }
         eval_solve(exprvec); 
         return 0.0;
 }
