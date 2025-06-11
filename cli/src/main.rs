@@ -11,15 +11,19 @@ fn main() {
             }
             Err(error) => println!("error: {error}"),
         }
-        let mut nums: Vec<exprnum> = Vec::new();
+        eval(input);
+    }
+}
+fn eval(expr: String) -> f32 {
+    let mut nums: Vec<exprnum> = Vec::new();
         let mut active_num = String::new();
         let mut index: i32 = -1;
         let mut pos: i32 = 0;
-        for i in input.chars() {
+        for i in expr.chars() {
             index += 1;
             if i.is_digit(10) == true{
                 active_num.push(i);
-            } else if i == '.' && input.chars().nth((index-1).try_into().unwrap()).unwrap().is_digit(10) && input.chars().nth((index+1).try_into().unwrap()).unwrap().is_digit(10){
+            } else if i == '.' && expr.chars().nth((index-1).try_into().unwrap()).unwrap().is_digit(10) && expr.chars().nth((index+1).try_into().unwrap()).unwrap().is_digit(10){
                 active_num.push(i);
             } else {
                 if active_num.is_empty() == false {
@@ -32,5 +36,5 @@ fn main() {
                 }
             }
         }
-    }
+        return 0.0;
 }
