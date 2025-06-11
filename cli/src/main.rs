@@ -40,7 +40,7 @@ fn eval(expr: String) -> f32 {
                         active_num = String::new();
                         pos += 1;
                     }
-                    if expr.chars().nth((index+1).try_into().unwrap()).unwrap().is_digit(10) && !expr.chars().nth((index-1).try_into().unwrap()).unwrap().is_digit(10) && active_num.is_empty(){
+                    if expr.chars().nth((index+1).try_into().unwrap()).unwrap().is_digit(10) && (index == 0||!expr.chars().nth((index-1).try_into().unwrap()).unwrap().is_digit(10) && active_num.is_empty()){
                         active_num.push(i);
                     }
                     if !exprvec.is_empty() {
