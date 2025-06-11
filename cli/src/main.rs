@@ -11,7 +11,7 @@ fn main() {
     loop {
         let mut input = String::new();
         match io::stdin().read_line(&mut input) {
-            Ok(n) => {
+            Ok(_) => {
             }
             Err(error) => println!("error: {error}"),
         }
@@ -40,6 +40,9 @@ fn eval(expr: String) -> f32 {
                         active_num = String::new();
                         pos += 1;
                     }
+                    if expr.chars().nth((index+1).try_into().unwrap()).unwrap().is_digit(10) && !expr.chars().nth((index-1).try_into().unwrap()).unwrap().is_digit(10) && active_num.is_empty(){
+                        active_num.push(i);
+                    }
                     if !exprvec.is_empty() {
                         let a_pos: i32 = pos;
                         exprvec.push(exprpart{val: exprpartval::oper(i),pos: a_pos});
@@ -54,8 +57,12 @@ fn eval(expr: String) -> f32 {
                         exprvec.push(a_exprpart);
                         active_num = String::new();
                         pos += 1;
+                    } 
+                    } else {
+                        println!("Error: Illegal characters");
+                        return -1.0; 
                     }
-                }
+                
             }
         }
         return 0.0;
