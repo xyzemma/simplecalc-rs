@@ -63,7 +63,6 @@ fn eval(expr: String) -> f32 {
 }
 fn eval_solve(mut expr: Vec<exprpart>) -> Vec<exprpart>{
     let mut rvec: Vec<exprpart> = Vec::new();
-    // Solve multiplications and divisions first
     let mut found_m_d = true;
     while found_m_d {
         found_m_d = false;
@@ -121,7 +120,6 @@ fn eval_solve(mut expr: Vec<exprpart>) -> Vec<exprpart>{
         }
     }
     }
-    // Solving addition and subtraction next
     let mut found_a_s = true;
     while found_a_s {
         found_a_s = false;
