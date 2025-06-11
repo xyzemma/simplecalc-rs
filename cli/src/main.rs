@@ -68,13 +68,16 @@ fn eval(expr: String) -> f32 {
 fn eval_solve(mut expr: Vec<exprpart>) -> Vec<exprpart>{
     let mut rvec: Vec<exprpart> = Vec::new();
     // Solve multiplications and divisions first
-    loop {
+    let mut found_mlt = true;
+    while found_mlt {
+        found_mlt = false;
         for (i,val) in expr.iter().enumerate() {
             match val.val {
                 exprpartval::num { value } => {},
                 exprpartval::oper { value } => {
                     let Operator = value;
                     if Operator == '*' {
+                        found_mlt = true;
                         let mut lvalue = 0.0;
                         let mut rvalue = 0.0;
                         match expr[i-1].val {
