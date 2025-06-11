@@ -177,10 +177,14 @@ fn eval_solve(mut expr: Vec<exprpart>) -> Vec<exprpart>{
         }
     }
     }
-    for i in &expr {
-        match i.val {
-            exprpartval::num { value } => println!("Number: {}", value),
-            exprpartval::oper { value } => println!("Operator: {}", value),
+    if expr.len() >1 {
+        println!("Error: Could not solve Expression");
+    } else{
+        for i in &expr {
+            match i.val {
+                exprpartval::num { value } => println!("Number: {}", value),
+                exprpartval::oper { value } => println!("Operator: {}", value),
+            }
         }
     }
 
