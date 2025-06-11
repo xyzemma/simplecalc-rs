@@ -32,14 +32,26 @@ fn eval(expr: String) -> f32 {
                 active_num.push(i);
             } else {
                 if operators.contains(&i) {
-
+                    if active_num.is_empty() == false {
+                        let anf32: f32 = active_num.clone().parse().unwrap();
+                        let a_pos: i32 = pos;
+                        let a_exprpart = exprpart {val: exprpartval::num(anf32), pos: a_pos};
+                        exprvec.push(a_exprpart);
+                        active_num = String::new();
+                        pos += 1;
+                    }
+                    if !exprvec.is_empty() {
+                        let a_pos: i32 = pos;
+                        exprvec.push(exprpart{val: exprpartval::oper(i),pos: a_pos});
+                        pos += 1;
+                    }
 
                 } else if i.is_whitespace() {
                     if active_num.is_empty() == false {
                         let anf32: f32 = active_num.clone().parse().unwrap();
                         let a_pos: i32 = pos;
-                        let a_exprnum = exprpart {val: exprpartval::num(anf32), pos: a_pos};
-                        exprvec.push(a_exprnum);
+                        let a_exprpart = exprpart {val: exprpartval::num(anf32), pos: a_pos};
+                        exprvec.push(a_exprpart);
                         active_num = String::new();
                         pos += 1;
                     }
