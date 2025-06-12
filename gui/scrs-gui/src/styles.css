@@ -1,0 +1,32 @@
+.buttons {
+  width: 20%;
+  margin-top: 10px;
+  margin-left: 5%;
+  transform: translate(-10%,50%);
+  height: 100px;
+  font-size: larger;
+  border-radius: 20px;
+}
+#mainfield {
+  height: 100px;
+  transform: translate(2%);
+}
+.submitbutton {
+  width: 70%;
+  margin-top: 10px;
+  margin-left: 5%;
+  transform: translate(-3%,52%);
+  height: 100px;
+  font-size: x-large;
+  border-radius: 20px;
+}
+h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: left;
+  font-size:xx-large;
+  transform: translate(2%);
+  color: aliceblue;
+}
+body {
+  background-color: rgb(43, 43, 43);
+}

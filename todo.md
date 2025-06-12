@@ -14,7 +14,7 @@
 
 ## GUI
 
-- Entire GUI -> eframe
+- Entire GUI
 
 ## Miscellanious
 
