@@ -48,7 +48,7 @@ pub fn eval(expr: String) -> f32 {
     
 }
 pub fn eval_solve(mut expr: Vec<exprpart>) -> f32{
-    let mut rvalue: f32 = 0.0;
+    let mut returnvalue: f32 = 0.0;
     let mut rvec: Vec<exprpart> = Vec::new();
     let mut found_m_d = true;
     while found_m_d {
@@ -169,13 +169,13 @@ pub fn eval_solve(mut expr: Vec<exprpart>) -> f32{
     } else{
         for i in &expr {
             match i.val {
-                exprpartval::num { value } => {rvalue = value;},
+                exprpartval::num { value } => {returnvalue = value;},
                 exprpartval::oper { value } => println!("Operator: {}", value),
         }
     }
 }
 
-return rvalue;
+return returnvalue;
 
 
 }
